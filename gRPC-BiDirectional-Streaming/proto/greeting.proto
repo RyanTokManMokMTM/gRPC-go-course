@@ -1,0 +1,24 @@
+syntax = 'proto3';
+package Greeting;
+option go_package = "github.com/ryantokmanmokmtm/gRPC-BiDirectional-Streaming";
+
+service GreetingService {
+  rpc GreetEveryOne(stream GreetRequest) returns (stream GreetResponse);
+  rpc MaxCalculator(stream MaxCalculatorRequest) returns (stream MaxCalculatorResponse);
+}
+
+message GreetRequest{
+  string name = 1;
+}
+
+message GreetResponse{
+  string result = 1;
+}
+
+message MaxCalculatorRequest{
+  int32 num = 1;
+}
+
+message MaxCalculatorResponse{
+  int32 result = 1;
+}

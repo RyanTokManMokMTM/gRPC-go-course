@@ -1,0 +1,24 @@
+syntax = 'proto3';
+package math;
+option go_package = "github.com/ryantokmanmokmtm/gRPC-ErrorHandle";
+
+service MathService {
+  rpc Sqrt(SqrtRequest) returns (SqrtResponse);
+  rpc DeadlineHandle(GreetingRequest) returns (GreetingResponse);
+}
+
+message SqrtRequest{
+  int32 sqrtNum = 1;
+}
+
+message SqrtResponse{
+  float result = 1;
+}
+
+message GreetingRequest {
+  string Name = 1;
+}
+
+message GreetingResponse{
+  string result = 1;
+}

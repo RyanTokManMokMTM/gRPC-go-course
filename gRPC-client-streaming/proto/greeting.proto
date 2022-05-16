@@ -1,0 +1,24 @@
+syntax = 'proto3';
+package greeting;
+option go_package = "github.com/ryantokmanmokmtm/gRPC-client-streaming";
+
+service Greeting{
+  rpc KeepGreeting(stream GreetingRequest) returns (GreetingResponse);
+  rpc AvgCalculator(stream CalculatorRequest) returns (CalculatorResponse);
+}
+
+message GreetingRequest{
+  string name = 1;
+}
+
+message GreetingResponse{
+  string result = 1;
+}
+
+message CalculatorRequest{
+  int32 number = 1;
+}
+
+message CalculatorResponse{
+  float result =1;
+}

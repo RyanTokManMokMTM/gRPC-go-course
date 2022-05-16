@@ -1,0 +1,51 @@
+syntax = 'proto3';
+package basic;
+option go_package="github.com/ryantokmanmokmtm/basic-grpc";
+
+service RouteGuide {
+  //Unary service
+  //The client sends a request to the server using the stub and waits for a response to come back
+  rpc GetFeature(Point) returns (Feature){}
+
+  //Server-side streaming
+  //Client sends a request to the server and gets a stream to read a sequence of message back
+  //The client reads from the returned stream until there are no more messages.
+  rpc ListFeatures(Rectangle) returns (stream Feature){}
+
+  //Client-side streaming
+  //client writes a sequence of message and sends them to the server
+  //Once the client has finished writing the message, it waits for the server to read them
+  //and return its response
+  rpc RecordRoute(stream Point) returns (RouteSummary){}
+
+  //Bidirectional streaming
+  //both sides send sequence of messages using a read-write stream
+  //The two streams operate independently, so clients and server can read and write in whatever order they like
+  //For example:
+  // Server waits to receive all the client messages before writing its response
+  // Server could alternatively read a message then write a message, or some other combination of reads and write
+  rpc RouteChat(stream RouteNote) returns (stream RouteNote){}
+}
+//format for request and response
+message Point{
+  int32 latitude = 1;
+  int32 longitude = 2;
+}
+message Feature{
+  string name = 1;
+  Point location = 2;
+}
+message Rectangle{
+  Point lo = 1;
+  Point hi = 2;
+}
+message RouteSummary{
+  int32 point_count = 1;
+  int32 feature_count = 2;
+  int32 distance = 3;
+  int32 elapsed_time = 4;
+}
+message RouteNote{
+  Point location = 1;
+  string message = 2;
+}

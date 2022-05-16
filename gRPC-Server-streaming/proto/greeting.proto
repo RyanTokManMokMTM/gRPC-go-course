@@ -1,0 +1,24 @@
+syntax = 'proto3';
+package greeting;
+option go_package = "github.com/ryantokmanmokmtm/gRPC-Server-streaming";
+
+service Greeting{
+  rpc GreetingMany(GreetingRequest) returns (stream GreetingResponse);
+  rpc CalculatePrimeNum(Number) returns (stream PrimeResponse);
+}
+
+message GreetingRequest{
+  string message = 1;
+}
+
+message GreetingResponse{
+  string result = 1;
+}
+
+message Number{
+  int32 num = 1;
+}
+
+message PrimeResponse{
+  int32 prime = 1;
+}
